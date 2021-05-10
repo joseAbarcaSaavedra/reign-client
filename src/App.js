@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { FeedList } from './components/FeedList'
+
+const ITEM = {
+  created_at: '2021-05-10T04:03:14.000Z',
+  title: null,
+  url: null,
+  author: 'vorpalhex',
+  points: null,
+  story_text: null,
+  comment_text:
+    'Node JS based instead of running a full LAMP stack. I believe ghost supports sqlite for low traffic.',
+  num_comments: null,
+  story_id: 27100974,
+  story_title: 'Show HN: Run your ghost blog on Raspberry Pi for free',
+  story_url:
+    'https://viggy28.dev/article/setting-up-ghost-in-raspberry-pi-for-free/',
+  parent_id: 27101673,
+  created_at_i: 1620619394,
+  _tags: ['comment', 'author_vorpalhex', 'story_27100974'],
+  objectID: '27102565',
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className='App'>
+      <header>
+        <h1>News Feed</h1>
       </header>
+      <FeedList
+        items={[ITEM, ITEM, ITEM, ITEM, ITEM]}
+        columns={['Title', 'Author', 'ObjectID', 'Timestamp', 'REMOVE?']}
+      />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
