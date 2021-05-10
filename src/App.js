@@ -1,6 +1,6 @@
 import './App.css'
 import { FeedList } from './components/FeedList'
-
+import { PageHeader } from './components/PageHeader'
 const ITEM = {
   created_at: '2021-05-10T04:03:14.000Z',
   title: null,
@@ -24,9 +24,7 @@ const ITEM = {
 function App() {
   return (
     <div className='App'>
-      <header>
-        <h1>News Feed</h1>
-      </header>
+      <PageHeader title='HN Feed' subtitle='We <3 hacker news!' />
       <FeedList
         items={[ITEM, ITEM, ITEM, ITEM, ITEM]}
         columns={['Title', 'Author', 'ObjectID', 'Timestamp', 'REMOVE?']}

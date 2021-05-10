@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FeedItem } from '../FeedItem'
-import { Table } from './styles'
+import { Table, TdBordered } from './styles'
 
 const getItemKey = (item) => (item && item.objectID) || JSON.stringify(item)
 
@@ -33,23 +33,23 @@ export const FeedList = ({ items = [], columns = [] }) => {
     <div>
       <section>
         <Table>
-          <thead>
+          {/* <thead>
             <tr>
               {columns.map((col, key) => (
                 <th key={key}>{col}</th>
               ))}
             </tr>
-          </thead>
+          </thead> */}
           <tbody>
             {feed.map((item, key) => (
               <tr key={key}>
-                <td colSpan={columns.length || 5}>
+                <TdBordered colSpan={columns.length || 4}>
                   <FeedItem
                     key={key}
                     data={{ ...item, key }}
                     onRemove={onRemoveItem}
                   />
-                </td>
+                </TdBordered>
               </tr>
             ))}
           </tbody>
