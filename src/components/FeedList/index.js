@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { FeedItem } from '../FeedItem'
-import { Table, TdBordered } from './styles'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { Table, TdBordered } from './styles'
+
 const getItemKey = (item) => (item && item.objectID) || JSON.stringify(item)
 const deletedFilter = (deletedItems) => (item) => {
   const iKey = item.objectID
