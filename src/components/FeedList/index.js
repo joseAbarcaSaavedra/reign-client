@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { FeedItem } from '../FeedItem'
 import { Table, TdBordered } from './styles'
-
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 const getItemKey = (item) => (item && item.objectID) || JSON.stringify(item)
-
+const deletedFilter = (deletedItems) => (item) => {
+  const iKey = item.objectID
+  const visible = deletedItems && !deletedItems[iKey]
+  return visible
+}
 export const FeedList = ({ items = [], columns = [] }) => {
-  const [deletedItems, setDeletedItems] = useState({})
+  const [deletedItems, setDeletedItems] = useLocalStorage('deleted-items', {})
   const [deletedItem, setDeletedItem] = useState(null)
-  const [feed, setFeed] = useState(items)
+  const [feed, setFeed] = useState(items.filter(deletedFilter(deletedItems)))
+
   // on load
   useEffect(() => {
-    const deleted = deletedItem
-    const f = items.filter((item) => {
-      const visible = deletedItems && !deletedItems[deleted]
-      return visible
-    })
+    const f = items.filter(deletedFilter(deletedItems))
     setFeed(f)
   }, [deletedItem, deletedItems, items])
 
@@ -22,10 +23,6 @@ export const FeedList = ({ items = [], columns = [] }) => {
     const removedObj = deletedItems || {}
     const iKey = getItemKey(item)
     setDeletedItem(iKey)
-
-    // set in localStorage
-
-    // update remove items
     removedObj[iKey] = true
     setDeletedItems(removedObj)
   }
@@ -33,13 +30,6 @@ export const FeedList = ({ items = [], columns = [] }) => {
     <div>
       <section>
         <Table>
-          {/* <thead>
-            <tr>
-              {columns.map((col, key) => (
-                <th key={key}>{col}</th>
-              ))}
-            </tr>
-          </thead> */}
           <tbody>
             {feed.map((item, key) => (
               <tr key={key}>
