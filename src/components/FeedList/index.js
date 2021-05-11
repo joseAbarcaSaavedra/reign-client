@@ -8,6 +8,7 @@ const deletedFilter = (deletedItems) => (item) => {
   const visible = deletedItems && !deletedItems[iKey]
   return visible
 }
+
 export const FeedList = ({ items = [], columns = [] }) => {
   const [deletedItems, setDeletedItems] = useLocalStorage('deleted-items', {})
   const [deletedItem, setDeletedItem] = useState(null)
@@ -26,6 +27,7 @@ export const FeedList = ({ items = [], columns = [] }) => {
     removedObj[iKey] = true
     setDeletedItems(removedObj)
   }
+
   return (
     <div>
       <section>
